@@ -42,7 +42,8 @@ public class PlayerGameFlowTest {
 	
 		// When: I Player a game
 		IPlayerGameFlow IPGF = new PlayerGameFlow(mockConvertCardValue, mockSumPoints, mockCheckIfUnder22);
-		IPGF.getResult();
+		ArrayList<String> hand = new ArrayList<String>();
+		IPGF.getResult(hand);
 		
 		// Then: mockCreateDeck will be called one time
 		//		mockCheckIfUnder22 will be called one time
