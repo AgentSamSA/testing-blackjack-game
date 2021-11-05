@@ -25,11 +25,7 @@ public class PlayerGameFlowTest {
 
     @Mock
 	ISumPoints mockSumPoints = mock(ISumPoints.class);
-	
-    @Mock
-    ICheckIfUnder22 mockCheckIfUnder22 = mock(ICheckIfUnder22.class);
 
-    
 
 
     @Test
@@ -37,19 +33,17 @@ public class PlayerGameFlowTest {
 
 		// Given: I am a user
         given(mockConvertCardValue.getResult("A")).willReturn(11);
-		given(mockSumPoints.sum(new ArrayList<Integer>())).willReturn(2);
-		given(mockCheckIfUnder22.getResult(9)).willReturn(true); 
+		given(mockSumPoints.sum(new ArrayList<Integer>(Arrays.asList(11)))).willReturn(11);
 	
 		// When: I Player a game
-		IPlayerGameFlow IPGF = new PlayerGameFlow(mockConvertCardValue, mockSumPoints, mockCheckIfUnder22);
-		ArrayList<String> hand = new ArrayList<String>();
+		IPlayerGameFlow IPGF = new PlayerGameFlow(mockConvertCardValue, mockSumPoints);
+		ArrayList<String> hand = new ArrayList<String>(Arrays.asList("A"));
 		IPGF.getResult(hand);
 		
-		// Then: mockCreateDeck will be called one time
-		//		mockCheckIfUnder22 will be called one time
-		verify(mockConvertCardValue, times(2)).getResult("A");
-        verify(mockSumPoints, times(1)).sum(new ArrayList<Integer>());
-		verify(mockCheckIfUnder22, times(1)).getResult(9);
+		// Then: mockConvertCardValue will be called one time
+		//		mockSumPoints will be called one time
+		verify(mockConvertCardValue, times(1)).getResult("A");
+        verify(mockSumPoints, times(1)).sum(new ArrayList<Integer>(Arrays.asList(11)));
 
 	}
 }

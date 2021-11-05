@@ -63,7 +63,7 @@ public class AppConfig {
 	
 	@Bean(name = "IPlayerGameFlow") 
 	public IPlayerGameFlow createPlayerGameFlow() {
-		return new PlayerGameFlow(createConvertCardValue(), createSumPoints(), createCheckIfUnder22());
+		return new PlayerGameFlow(createConvertCardValue(), createSumPoints());
 	}
 
 }

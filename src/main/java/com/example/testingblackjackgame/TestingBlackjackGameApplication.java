@@ -1,5 +1,8 @@
 package com.example.testingblackjackgame;
 
+import com.example.testingblackjackgame.Flow.IStartGameFlow;
+import com.example.testingblackjackgame.Flow.StartGameFlow;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TestingBlackjackGameApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestingBlackjackGameApplication.class, args);
 	}
 
 }
