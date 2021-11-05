@@ -8,7 +8,9 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 import org.junit.Test;
+
 import org.mockito.Mock;
 
 import com.example.testingblackjackgame.Deck.*;
@@ -23,6 +25,7 @@ public class StartGameFlowTest {
 
 	@Mock
 	IDealtACardToHand mockDealtACardToHand = mock(IDealtACardToHand.class);
+
 	
 	ArrayList<String> deck = new ArrayList<String>(Arrays.asList("A", "A", "A", "A", "2", "2", "2", "2", "3", "3", "3", "3", 
 																 "4", "4", "4", "4", "5", "5", "5", "5", "6", "6", "6", "6", 
@@ -50,6 +53,7 @@ public class StartGameFlowTest {
 		verify(mockCreateDeck, times(1)).getResult();
 		verify(mockShuffleDeck, times(1)).getResult(deck);
 		verify(mockDealtACardToHand, times(3)).getResult(deck, hand);
+
 	}
 
 }

@@ -18,6 +18,7 @@ public class AppConfig {
 	}
 
 
+
 	@Bean(name = "IDealtACardToHand")
 	public IDealtACardToHand createDealtACardToHand() {
 		return new DealtACardToHand();
@@ -26,6 +27,7 @@ public class AppConfig {
 	@Bean(name = "IStartGameFlow")
 	public IStartGameFlow createStartGameFlow() {
 		return new StartGameFlow(createCreateDeck(), createShuffleDeck(), createDealtACardToHand());
+
 	}
 
 }

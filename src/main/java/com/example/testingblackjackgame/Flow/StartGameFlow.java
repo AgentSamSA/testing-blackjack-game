@@ -2,7 +2,9 @@ package com.example.testingblackjackgame.Flow;
 
 import java.util.ArrayList;
 
+
 import com.example.testingblackjackgame.Deck.*;
+
 
 public class StartGameFlow implements IStartGameFlow {
 	
@@ -13,6 +15,7 @@ public class StartGameFlow implements IStartGameFlow {
 		this._ICD = ICD;
 		this._ISD = ISD;
 		this._IDACTH = IDCTH;
+
 	}
 	
 	public void getResult() {
@@ -27,6 +30,7 @@ public class StartGameFlow implements IStartGameFlow {
 		this._IDACTH.getResult(deck, playerHand);
 		this._IDACTH.getResult(deck, playerHand);
 		this._IDACTH.getResult(deck, dealerHand);
+
 	}
 }
 
