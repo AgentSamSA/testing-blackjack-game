@@ -17,7 +17,10 @@ public class AppConfig {
 		return new ShuffleDeck();
 	}
 
-
+	@Bean(name = "ICreateHand")
+	public ICreateHand createCreateHand() {
+		return new CreateHand();
+	}
 
 	@Bean(name = "IDealtACardToHand")
 	public IDealtACardToHand createDealtACardToHand() {
@@ -26,8 +29,18 @@ public class AppConfig {
 	
 	@Bean(name = "IStartGameFlow")
 	public IStartGameFlow createStartGameFlow() {
-		return new StartGameFlow(createCreateDeck(), createShuffleDeck(), createDealtACardToHand());
-
+		return new StartGameFlow(createCreateDeck(), createShuffleDeck());
 	}
+
+	@Bean(name = "ICreatePlayerHandFlow")
+	public ICreateHandFlow createCreatePlayerHandFlow() {
+		return new CreatePlayerHandFlow(createCreateHand(), createDealtACardToHand());
+	}
+
+	@Bean(name = "ICreateDealerHandFlow")
+	public ICreateHandFlow createCreateDealerHandFlow() {
+		return new CreateDealerHandFlow(createCreateHand(), createDealtACardToHand());
+	}
+
 
 }

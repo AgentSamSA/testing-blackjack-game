@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.example.testingblackjackgame.Deck.ConvertCardValue;
-import com.example.testingblackjackgame.Deck.IConvertCardValue;
 
 public class ConvertCardValueTest {
 

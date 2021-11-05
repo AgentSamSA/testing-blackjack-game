@@ -22,10 +22,6 @@ public class StartGameFlowTest {
 	
 	@Mock
 	IShuffleDeck mockShuffleDeck = mock(IShuffleDeck.class);
-
-	@Mock
-	IDealtACardToHand mockDealtACardToHand = mock(IDealtACardToHand.class);
-
 	
 	ArrayList<String> deck = new ArrayList<String>(Arrays.asList("A", "A", "A", "A", "2", "2", "2", "2", "3", "3", "3", "3", 
 																 "4", "4", "4", "4", "5", "5", "5", "5", "6", "6", "6", "6", 
@@ -35,24 +31,19 @@ public class StartGameFlowTest {
 
 	@Test
 	public void startGameFlowTest() {
-		ArrayList<String> hand = new ArrayList<String>();
 
 		// Given: I am a user
 		given(mockCreateDeck.getResult()).willReturn(deck);
 		given(mockShuffleDeck.getResult(deck)).willReturn(deck); 
-		given(mockDealtACardToHand.getResult(deck, hand)).willReturn("Card Dealt!"); 
-		
 	
 		// When: I start a game
-		IStartGameFlow ISGF = new StartGameFlow(mockCreateDeck, mockShuffleDeck, mockDealtACardToHand);
+		IStartGameFlow ISGF = new StartGameFlow(mockCreateDeck, mockShuffleDeck);
 		ISGF.getResult();
 		
 		// Then: mockCreateDeck will be called one time
 		//		mockShuffleDeck will be called one time
-		//		mockDealtACardToHand will be called three time
 		verify(mockCreateDeck, times(1)).getResult();
 		verify(mockShuffleDeck, times(1)).getResult(deck);
-		verify(mockDealtACardToHand, times(3)).getResult(deck, hand);
 
 	}
 
