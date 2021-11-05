@@ -16,10 +16,18 @@ public class AppConfig {
 	public IShuffleDeck createShuffleDeck() {
 		return new ShuffleDeck();
 	}
+
+
+
+	@Bean(name = "IDealtACardToHand")
+	public IDealtACardToHand createDealtACardToHand() {
+		return new DealtACardToHand();
+	}
 	
 	@Bean(name = "IStartGameFlow")
 	public IStartGameFlow createStartGameFlow() {
-		return new StartGameFlow(createCreateDeck(), createShuffleDeck());
+		return new StartGameFlow(createCreateDeck(), createShuffleDeck(), createDealtACardToHand());
+
 	}
 
 }
