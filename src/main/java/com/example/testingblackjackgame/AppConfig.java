@@ -73,10 +73,10 @@ public class AppConfig {
 	public IConvertAceToOne createConvertAveToOne() {
 		return new ConvertAceToOne();
 	}
-	@Bean(name = "IPlayerGameLoopFlow") 
-	public IPlayerGameLoopFlow createPlayerGameLoopFlow() {
-		return new PlayerGameLoopFlow(createPlayerGameFlow(), createDealtACardToHand(),
-									createCheckIfUnder22(), createConvertAveToOne(), createConvertCardValue(), createMyScanner());
+	@Bean(name = "IPlayerGamePointsCheckFlow") 
+	public IPlayerGamePointsCheckFlow createPlayerGamePointsCheckFlow() {
+		return new PlayerGamePointsCheckFlow(createPlayerGameFlow(),
+									createCheckIfUnder22());
 	}
 
 }
