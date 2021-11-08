@@ -63,7 +63,7 @@ public class DealerGameFlowTest {
     	given(mockConvertCardValue.getResult("5")).willReturn(5);
 		given(mockSumPoints.sum(handInt)).willReturn(16);
 		given(mockDealerPointCheck.getResult(16)).willReturn(true);
-		given(mockDealtACardToHand.getResult(deck, handStr)).willReturn(handStr);
+		given(mockDealtACardToHand.getResult(deck, handStr)).willReturn("5");
 		
 		// When: I Player a game
 		IDealerGameFlow IPGF = new DealerGameFlow(mockConvertCardValue, mockSumPoints, mockDealerPointCheck, mockDealtACardToHand);
