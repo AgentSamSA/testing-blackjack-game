@@ -3,11 +3,8 @@ package com.example.testingblackjackgame.Flow;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.example.testingblackjackgame.Deck.IConvertAceToOne;
-import com.example.testingblackjackgame.Deck.IConvertCardValue;
-import com.example.testingblackjackgame.Deck.IDealtACardToHand;
-import com.example.testingblackjackgame.Scoring.ICheckIfUnder22;
-import com.example.testingblackjackgame.Scoring.ISumPoints;
+import com.example.testingblackjackgame.Deck.*;
+import com.example.testingblackjackgame.Scoring.*;
 
 public class PlayerGameLoopFlow implements IPlayerGameLoopFlow{
 
@@ -50,10 +47,7 @@ public class PlayerGameLoopFlow implements IPlayerGameLoopFlow{
             }
         }
 
-        
-
-
-
+        scanner.close();
         return totalPoints;
     }
     
