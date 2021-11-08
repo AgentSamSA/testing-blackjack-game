@@ -29,7 +29,7 @@ public class CreateDealerHandFlowTest {
 																"Q", "Q", "Q", "Q", "K", "K", "K", "K"));
 
 	@Test
-	public void createDealerHandFlowTest() {
+	public void givenAStartingHandCallCreateDealerHandOnce() {
 
 		ArrayList<String> hand = new ArrayList<String>();
 
@@ -42,9 +42,23 @@ public class CreateDealerHandFlowTest {
 		ICHF.getResult(deck);
 		
 		// Then: mockCreateHand will be called one time
-		//		mockDealtACardToHand will be called one times
 		verify(mockCreateDealerHand, times(1)).getResult();
-		verify(mockDealtACardToHand, times(1)).getResult(deck, hand);
+	}
 
+	@Test
+	public void givenAStartingHandCallDealtACardToHandOnce() {
+
+		ArrayList<String> hand = new ArrayList<String>();
+
+		// Given: I am a dealer
+		given(mockCreateDealerHand.getResult()).willReturn(new ArrayList<String>());
+		given(mockDealtACardToHand.getResult(deck, hand)).willReturn(hand); 
+	
+		// When: I get my starting hand
+		ICreateHandFlow ICHF = new CreateDealerHandFlow(mockCreateDealerHand, mockDealtACardToHand);
+		ICHF.getResult(deck);
+		
+		// Then: mockDealtACardToHand will be called one times
+		verify(mockDealtACardToHand, times(1)).getResult(deck, hand);
 	}
 }
