@@ -29,7 +29,7 @@ public class PlayerGameFlowTest {
 
 
     @Test
-	public void PlayerGameFlowTest() {
+	public void givenAPlayersHandCallConvertCardValueOnce() {
 
 		// Given: I am a user
         given(mockConvertCardValue.getResult("A")).willReturn(11);
@@ -41,9 +41,22 @@ public class PlayerGameFlowTest {
 		IPGF.getResult(hand);
 		
 		// Then: mockConvertCardValue will be called one time
-		//		mockSumPoints will be called one time
 		verify(mockConvertCardValue, times(1)).getResult("A");
-        verify(mockSumPoints, times(1)).sum(new ArrayList<Integer>(Arrays.asList(11)));
+	}
 
+    @Test
+	public void givenAPlayersHandCallSumPointsOnce() {
+
+		// Given: I am a user
+        given(mockConvertCardValue.getResult("A")).willReturn(11);
+		given(mockSumPoints.sum(new ArrayList<Integer>(Arrays.asList(11)))).willReturn(11);
+	
+		// When: I Player a game
+		IPlayerGameFlow IPGF = new PlayerGameFlow(mockConvertCardValue, mockSumPoints);
+		ArrayList<String> hand = new ArrayList<String>(Arrays.asList("A"));
+		IPGF.getResult(hand);
+		
+		// Then: mockSumPonts will be called one time
+        verify(mockSumPoints, times(1)).sum(new ArrayList<Integer>(Arrays.asList(11)));
 	}
 }

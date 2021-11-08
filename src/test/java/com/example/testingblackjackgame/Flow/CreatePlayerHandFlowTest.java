@@ -32,7 +32,7 @@ public class CreatePlayerHandFlowTest {
 
 
 	@Test
-	public void createPlayerHandFlowTest() {
+	public void givenAStartingHandCallCreateHandOnce() {
 
 		ArrayList<String> hand = new ArrayList<String>();
 
@@ -45,8 +45,23 @@ public class CreatePlayerHandFlowTest {
 		ICHF.getResult(deck);
 		
 		// Then: mockCreateHand will be called one time
-		//		mockDealtACardToHand will be called two times
 		verify(mockCreateHand, times(1)).getResult();
+	}
+
+	@Test
+	public void givenAStartingHandCallDealtACardToHandTwice() {
+
+		ArrayList<String> hand = new ArrayList<String>();
+
+		// Given: I am a player
+		given(mockCreateHand.getResult()).willReturn(new ArrayList<String>());
+		given(mockDealtACardToHand.getResult(deck, hand)).willReturn(hand); 
+	
+		// When: I get my starting hand
+		ICreateHandFlow ICHF = new CreatePlayerHandFlow(mockCreateHand, mockDealtACardToHand);
+		ICHF.getResult(deck);
+		
+		// Then: mockDealtACardToHand will be called two times
 		verify(mockDealtACardToHand, times(2)).getResult(deck, hand);
 
 	}

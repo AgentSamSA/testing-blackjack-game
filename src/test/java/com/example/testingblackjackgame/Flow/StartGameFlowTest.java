@@ -30,7 +30,7 @@ public class StartGameFlowTest {
 																 "Q", "Q", "Q", "Q", "K", "K", "K", "K"));
 
 	@Test
-	public void startGameFlowTest() {
+	public void givenStartGameFlowCallCreateDeckOnce() {
 
 		// Given: I am a user
 		given(mockCreateDeck.getResult()).willReturn(deck);
@@ -41,10 +41,22 @@ public class StartGameFlowTest {
 		ISGF.getResult();
 		
 		// Then: mockCreateDeck will be called one time
-		//		mockShuffleDeck will be called one time
 		verify(mockCreateDeck, times(1)).getResult();
-		verify(mockShuffleDeck, times(1)).getResult(deck);
+	}
 
+	@Test
+	public void givenStartGameFlowCallShuffleDeckOnce() {
+
+		// Given: I am a user
+		given(mockCreateDeck.getResult()).willReturn(deck);
+		given(mockShuffleDeck.getResult(deck)).willReturn(deck); 
+	
+		// When: I start a game
+		IStartGameFlow ISGF = new StartGameFlow(mockCreateDeck, mockShuffleDeck);
+		ISGF.getResult();
+		
+		//Then: mockShuffleDeck will be called one time
+		verify(mockShuffleDeck, times(1)).getResult(deck);
 	}
 
 }
