@@ -15,7 +15,7 @@ public class PlayerGamePointsCheckFlow implements IPlayerGamePointsCheckFlow{
     }
 
     @Override
-    public boolean getResult(ArrayList<String> deck, ArrayList<String> hand) {
+    public boolean getResult(ArrayList<String> hand) {
         int totalPoints = this._IPGF.getResult(hand);
         boolean under21Check = this._ICU21.getResult(totalPoints);
         return under21Check;

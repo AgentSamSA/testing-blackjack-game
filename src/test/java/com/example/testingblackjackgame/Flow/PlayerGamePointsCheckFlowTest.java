@@ -8,7 +8,6 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.example.testingblackjackgame.Deck.*;
 import com.example.testingblackjackgame.Scoring.*;
 import com.example.testingblackjackgame.scanner.*;
 
@@ -21,29 +20,10 @@ public class PlayerGamePointsCheckFlowTest {
 	IPlayerGameFlow mockPlayerGameFlow = mock(PlayerGameFlow.class);
 
 	@Mock
-	IDealtACardToHand mockDealtACardToHand = mock(IDealtACardToHand.class);
-
-	@Mock
 	ICheckIfUnder22 mockCheckIfUnder22 = mock(ICheckIfUnder22.class);
-
-	@Mock
-	IConvertAceToOne mockConvertAceToOne = mock(IConvertAceToOne.class);
-
-	@Mock
-	IConvertCardValue mockConvertCardValue = mock(IConvertCardValue.class);
-
-	@Mock
-	IMyScanner mockMyScanner = mock(IMyScanner.class);
 
 	ArrayList<String> hand = new ArrayList<String>(Arrays.asList("A", "10"));
 	ArrayList<String> hand2 = new ArrayList<String>(Arrays.asList("5", "10"));
-	ArrayList<Integer> handPoints = new ArrayList<Integer>(Arrays.asList(11, 10));
-
-	ArrayList<String> deck = new ArrayList<String>(Arrays.asList("A", "A", "A", "A", "2", "2", "2", "2", "3", "3", "3", "3", 
-																"4", "4", "4", "4", "5", "5", "5", "5", "6", "6", "6", "6", 
-																"7", "7", "7", "7", "8", "8", "8", "8", "9", "9", "9", "9", 
-																"10", "10", "10", "10", "J", "J", "J", "J", 
-																"Q", "Q", "Q", "Q", "K", "K", "K", "K"));
 	
 	@Test
 	public void givenAceTenHandCallPlayerGameFlowOnce() {
@@ -53,7 +33,7 @@ public class PlayerGamePointsCheckFlowTest {
 
 		//When: my hand is Ace and 10
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockPlayerGameFlow, mockCheckIfUnder22);
-		IPGLF.getResult(deck, hand);
+		IPGLF.getResult(hand);
 
 		//Then: mockPlayerGameFlow is called one time
 		verify(mockPlayerGameFlow, times(1)).getResult(hand);
@@ -67,7 +47,7 @@ public class PlayerGamePointsCheckFlowTest {
 
 		//When: my hand is Ace and 10
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockPlayerGameFlow, mockCheckIfUnder22);
-		IPGLF.getResult(deck, hand);
+		IPGLF.getResult(hand);
 
 		//Then: mockCheckIfUnder22 is called one time
 		verify(mockCheckIfUnder22, times(1)).getResult(21);
@@ -81,7 +61,7 @@ public class PlayerGamePointsCheckFlowTest {
 
 		//When: my hand is 5 and 10
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockPlayerGameFlow, mockCheckIfUnder22);
-		IPGLF.getResult(deck, hand2);
+		IPGLF.getResult(hand2);
 
 		//Then: mockPlayerGameFlow is called one time
 		verify(mockPlayerGameFlow, times(1)).getResult(hand2);
@@ -95,7 +75,7 @@ public class PlayerGamePointsCheckFlowTest {
 
 		//When: my hand is 5 and 10
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockPlayerGameFlow, mockCheckIfUnder22);
-		IPGLF.getResult(deck, hand2);
+		IPGLF.getResult(hand2);
 
 		//Then: mockCheckIfUnder22 is called one time
 		verify(mockCheckIfUnder22, times(1)).getResult(15);
