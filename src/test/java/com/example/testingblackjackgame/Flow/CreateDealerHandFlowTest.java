@@ -35,7 +35,7 @@ public class CreateDealerHandFlowTest {
 
 		// Given: I am a dealer
 		given(mockCreateDealerHand.getResult()).willReturn(new ArrayList<String>());
-		given(mockDealtACardToHand.getResult(deck, hand)).willReturn(hand); 
+		given(mockDealtACardToHand.getResult(deck, hand)).willReturn("A"); 
 	
 		// When: I get my starting hand
 		ICreateHandFlow ICHF = new CreateDealerHandFlow(mockCreateDealerHand, mockDealtACardToHand);
@@ -52,7 +52,7 @@ public class CreateDealerHandFlowTest {
 
 		// Given: I am a dealer
 		given(mockCreateDealerHand.getResult()).willReturn(new ArrayList<String>());
-		given(mockDealtACardToHand.getResult(deck, hand)).willReturn(hand); 
+		given(mockDealtACardToHand.getResult(deck, hand)).willReturn("A"); 
 	
 		// When: I get my starting hand
 		ICreateHandFlow ICHF = new CreateDealerHandFlow(mockCreateDealerHand, mockDealtACardToHand);

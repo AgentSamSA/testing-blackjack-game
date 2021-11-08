@@ -4,10 +4,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.testingblackjackgame.Deck.*;
 import com.example.testingblackjackgame.Flow.*;
-import com.example.testingblackjackgame.Scoring.CheckIfUnder22;
-import com.example.testingblackjackgame.Scoring.ICheckIfUnder22;
-import com.example.testingblackjackgame.Scoring.ISumPoints;
-import com.example.testingblackjackgame.Scoring.SumPoints;
+import com.example.testingblackjackgame.Scoring.*;
+import com.example.testingblackjackgame.scanner.*;
 
 public class AppConfig {
 
@@ -60,10 +58,25 @@ public class AppConfig {
 	public ICheckIfUnder22 createCheckIfUnder22() {
 		return new CheckIfUnder22();
 	}
+
+	@Bean(name = "IMyScanner")
+	public IMyScanner createMyScanner() {
+		return new MyScanner();
+	}
 	
 	@Bean(name = "IPlayerGameFlow") 
 	public IPlayerGameFlow createPlayerGameFlow() {
 		return new PlayerGameFlow(createConvertCardValue(), createSumPoints());
+	}
+	
+	@Bean(name = "IConvertAceToOne") 
+	public IConvertAceToOne createConvertAveToOne() {
+		return new ConvertAceToOne();
+	}
+	@Bean(name = "IPlayerGameLoopFlow") 
+	public IPlayerGameLoopFlow createPlayerGameLoopFlow() {
+		return new PlayerGameLoopFlow(createPlayerGameFlow(), createDealtACardToHand(),
+									createCheckIfUnder22(), createConvertAveToOne(), createConvertCardValue(), createMyScanner());
 	}
 
 }

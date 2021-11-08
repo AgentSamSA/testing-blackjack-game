@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.example.testingblackjackgame.Deck.*;
 import com.example.testingblackjackgame.Scoring.*;
+import com.example.testingblackjackgame.scanner.*;
 
 public class PlayerGameLoopFlow implements IPlayerGameLoopFlow{
 
@@ -13,13 +14,15 @@ public class PlayerGameLoopFlow implements IPlayerGameLoopFlow{
     private ICheckIfUnder22 _ICU21;
     private IConvertAceToOne _ICATO;
     private IConvertCardValue _ICCV;
+    private IMyScanner _IMS;
 
-    public PlayerGameLoopFlow(IPlayerGameFlow IPGF, IDealtACardToHand IDCTH, ICheckIfUnder22 ICU21, IConvertAceToOne ICATO, IConvertCardValue ICCV) {
+    public PlayerGameLoopFlow(IPlayerGameFlow IPGF, IDealtACardToHand IDCTH, ICheckIfUnder22 ICU21, IConvertAceToOne ICATO, IConvertCardValue ICCV, IMyScanner IMS) {
         this._IPGF = IPGF;
         this._IDCTH = IDCTH;
         this._ICU21 = ICU21;
         this._ICATO = ICATO;
         this._ICCV = ICCV;
+        this._IMS = IMS;
     }
 
     @Override
@@ -30,17 +33,18 @@ public class PlayerGameLoopFlow implements IPlayerGameLoopFlow{
 
         boolean hit = this._ICU21.getResult(totalPoints);
         while (hit){
-            System.out.println("Would you want another card? Y/N");
-            String wantMore =  scanner.nextLine();
+            
+            String wantMore = this._IMS.getResult();
             if (wantMore.equals("Y") || wantMore.equals("y")) {
-                this._IDCTH.getResult(deck, hand);
-                totalPoints = this._IPGF.getResult(hand);
-                for (String s : hand) {
-                    pointsArray.add(this._ICCV.getResult(s));
-                }
+                String card = this._IDCTH.getResult(deck, hand);
+                int newPoint = this._ICCV.getResult(card);
+                pointsArray.add(newPoint);
+                totalPoints += newPoint;
                 if (totalPoints > 21 && pointsArray.contains(11)) {
                     this._ICATO.getResult(pointsArray);
+                    totalPoints -= 10;
                 }
+
                 hit = this._ICU21.getResult(totalPoints);
             } else {
                 hit = false;
