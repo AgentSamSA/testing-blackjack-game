@@ -70,12 +70,13 @@ public class AppConfig {
 	}
 	
 	@Bean(name = "IConvertAceToOne") 
-	public IConvertAceToOne createConvertAveToOne() {
+	public IConvertAceToOne createConvertAceToOne() {
 		return new ConvertAceToOne();
 	}
 	@Bean(name = "IPlayerGamePointsCheckFlow") 
 	public IPlayerGamePointsCheckFlow createPlayerGamePointsCheckFlow() {
-		return new PlayerGamePointsCheckFlow(createCheckIfUnder22(), createDealtACardToHand(), createMyScanner(), createConvertCardValue());
+		return new PlayerGamePointsCheckFlow(createCheckIfUnder22(), createDealtACardToHand(), createMyScanner(), 
+				createConvertCardValue(), createConvertAceToOne());
 	}
 
 }
