@@ -43,6 +43,7 @@ public class PlayerGamePointsCheckFlowTest {
 																"10", "10", "10", "10", "J", "J", "J", "J", 
 																"Q", "Q", "Q", "Q", "K", "K", "K", "K"));
 	
+	ArrayList<Integer> handValues = new ArrayList<Integer>(Arrays.asList(5, 10, 11));
 	@Test
 	public void givenAceTenHandCallCheckIfUnder22Once() {
 		//Given: I am a user
@@ -96,7 +97,8 @@ public class PlayerGamePointsCheckFlowTest {
 		given(mockMyScanner.getResult()).willReturn(true);
 		given(mockDealtACardToHand.getResult(deck, hand2)).willReturn("A");
 		given(mockConCardValue.getResult("A")).willReturn(11);
-		given(mockCheckIfUnder22.getResult(26)).willReturn(false);
+		given(mockConvertAceToOne.getResult(handValues)).willReturn(true);
+		given(mockCheckIfUnder22.getResult(16)).willReturn(true);
 
 		//When: my hand is 5, 10, and I add an "A" to my hand
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockCheckIfUnder22, mockDealtACardToHand, mockMyScanner, mockConCardValue, mockConvertAceToOne);
@@ -107,19 +109,20 @@ public class PlayerGamePointsCheckFlowTest {
 	}
 
 	@Test
-	public void givenFiveTenHandCallMyScannerZeroTimes() {
+	public void givenFiveTenHandCallMyScannerOneTimes() {
 		//Given: I am a user
 		given(mockCheckIfUnder22.getResult(15)).willReturn(true);
 		given(mockMyScanner.getResult()).willReturn(true);
 		given(mockDealtACardToHand.getResult(deck, hand)).willReturn("A");
 		given(mockConCardValue.getResult("A")).willReturn(11);
-		given(mockCheckIfUnder22.getResult(26)).willReturn(false);
+		given(mockConvertAceToOne.getResult(handValues)).willReturn(true);
+		given(mockCheckIfUnder22.getResult(16)).willReturn(true);
 
 		//When: my hand is 5, 10, and I add an "A" to my hand
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockCheckIfUnder22, mockDealtACardToHand, mockMyScanner, mockConCardValue, mockConvertAceToOne);
 		IPGLF.getResult(15, deck, hand2);
 
-		//Then: mockDealtACardToHand is called one time
+		//Then: mockConvertAceToOne is called one time
 		verify(mockMyScanner, times(1)).getResult();
 	}
 
@@ -130,7 +133,8 @@ public class PlayerGamePointsCheckFlowTest {
 		given(mockMyScanner.getResult()).willReturn(true);
 		given(mockDealtACardToHand.getResult(deck, hand2)).willReturn("A");
 		given(mockConCardValue.getResult("A")).willReturn(11);
-		given(mockCheckIfUnder22.getResult(26)).willReturn(false);
+		given(mockConvertAceToOne.getResult(handValues)).willReturn(true);
+		given(mockCheckIfUnder22.getResult(16)).willReturn(true);
 
 		//When: my hand is 5, 10, and I add an "A" to my hand
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockCheckIfUnder22, mockDealtACardToHand, mockMyScanner, mockConCardValue, mockConvertAceToOne);
@@ -148,7 +152,8 @@ public class PlayerGamePointsCheckFlowTest {
 		given(mockMyScanner.getResult()).willReturn(true);
 		given(mockDealtACardToHand.getResult(deck, hand2)).willReturn("A");
 		given(mockConCardValue.getResult("A")).willReturn(11);
-		given(mockCheckIfUnder22.getResult(26)).willReturn(false);
+		given(mockConvertAceToOne.getResult(handValues)).willReturn(true);
+		given(mockCheckIfUnder22.getResult(16)).willReturn(true);
 
 		//When: my hand is 5, 10, and I add an "A" to my hand
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockCheckIfUnder22, mockDealtACardToHand, mockMyScanner, mockConCardValue, mockConvertAceToOne);
@@ -160,13 +165,12 @@ public class PlayerGamePointsCheckFlowTest {
 
 	@Test
 	public void givenFiveTenAHandCallCheckIfUnder22OneTime() {
-		ArrayList<Integer> hand = new ArrayList<Integer>(Arrays.asList(5, 10, 11));
 		//Given: I am a user
 		given(mockCheckIfUnder22.getResult(15)).willReturn(true);
 		given(mockMyScanner.getResult()).willReturn(true);
 		given(mockDealtACardToHand.getResult(deck, hand2)).willReturn("A");
 		given(mockConCardValue.getResult("A")).willReturn(11);
-		given(mockConvertAceToOne.getResult(hand));
+		given(mockConvertAceToOne.getResult(handValues)).willReturn(true);
 		given(mockCheckIfUnder22.getResult(16)).willReturn(true);
 
 		//When: my hand is 5, 10, A
@@ -179,14 +183,13 @@ public class PlayerGamePointsCheckFlowTest {
 	
 	@Test
 	public void givenTenTenSixHandCallCheckIfUnder22OneTime() {
-		ArrayList<Integer> hand = new ArrayList<Integer>(Arrays.asList(10,10,6));
 		//Given: I am a user
 		given(mockCheckIfUnder22.getResult(15)).willReturn(true);
 		given(mockMyScanner.getResult()).willReturn(true);
 		given(mockDealtACardToHand.getResult(deck, hand2)).willReturn("A");
 		given(mockConCardValue.getResult("A")).willReturn(11);
-		given(mockConvertAceToOne.getResult(hand));
-		given(mockCheckIfUnder22.getResult(26)).willReturn(false);
+		given(mockConvertAceToOne.getResult(handValues)).willReturn(true);
+		given(mockCheckIfUnder22.getResult(16)).willReturn(true);
 
 		//When: my hand is 5, 10, A
 		IPlayerGamePointsCheckFlow IPGLF = new PlayerGamePointsCheckFlow(mockCheckIfUnder22, mockDealtACardToHand, mockMyScanner, mockConCardValue, mockConvertAceToOne);
