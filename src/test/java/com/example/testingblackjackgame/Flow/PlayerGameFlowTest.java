@@ -8,16 +8,11 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.example.testingblackjackgame.Deck.IConvertCardValue;
-import com.example.testingblackjackgame.Deck.IDealtACardToHand;
-import com.example.testingblackjackgame.Scoring.ICheckIfUnder22;
-import com.example.testingblackjackgame.Scoring.ISumPoints;
+import com.example.testingblackjackgame.Deck.*;
+import com.example.testingblackjackgame.Scoring.*;
 
 import org.junit.Test;
 import org.mockito.Mock;
-
-
-
 
 public class PlayerGameFlowTest {
     @Mock
