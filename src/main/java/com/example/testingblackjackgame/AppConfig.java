@@ -75,7 +75,7 @@ public class AppConfig {
 	}
 	@Bean(name = "IPlayerGamePointsCheckFlow") 
 	public IPlayerGamePointsCheckFlow createPlayerGamePointsCheckFlow() {
-		return new PlayerGamePointsCheckFlow(createCheckIfUnder22(), createDealtACardToHand());
+		return new PlayerGamePointsCheckFlow(createCheckIfUnder22(), createDealtACardToHand(), createMyScanner(), createConvertCardValue());
 	}
 
 }
